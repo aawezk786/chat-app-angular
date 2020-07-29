@@ -1,0 +1,79 @@
+<div class="container chat-container">
+  <div class="row chat-window col-xs-5 col-md-3">
+    <div class="col-xs-12 col-md-12">
+        <div class="panel">
+            <div class="panel-heading chat-top-bar">
+                <div class="col-md-8 col-xs-8">
+                    <h3 class="panel-title">Chat Box</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="msg-container-base">
+                    <div class="row msg-container" *ngFor="let message of messages">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="chat-msg"
+                                    [ngClass]="{'chat-msg-sent': selfAuthored, 'chat-msg-recieved': !selfAuthored}">
+                                <img *ngIf="message.imageUrl"
+                                          class="profile"
+                                          [ngClass]="{'pull-right': selfAuthored, 'pull-left': !selfAuthored}"
+                                          [src]="message.imageUrl" />
+                                <div class="message-text">
+                                  <p>&nbsp; {{ message.text }}</p>
+                                </div>
+                                <div class="chat-msg-author">
+                                    <strong>{{ message.username }}</strong>&nbsp;
+                                    <span class="time">Sent at: {{ message.date | date: 'shortTime' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-bottom-bar">
+                    <form style="display:inherit" (ngSubmit)="sendMessage()">
+                        <div class="input-group" >
+                            <input type="text"
+                                      class="form-control input-sm chat-input"
+                                      placeholder="Enter message"
+                                      name="messageText"
+                                      [(ngModel)]="messageText" />
+                            <span class="input-group-btn">
+                            <input type="submit" class="btn btn-sm chat-submit-button" />
+                        </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+<!--   <div class="col-md-8">
+    <form (ngSubmit)='sendMessage()'>
+      <div class='input-group'>
+        <input class='input-sm form-control'
+                    name= "messageText"
+                    [(ngModel)]="messageText"
+                    type='text'
+                    placeholder="Type a message...">
+        <span class='input-group-btn'>
+          <input class='input-sm btn btn-default'
+          type='submit'
+          value='Send'>
+        </span>
+      </div>
+    </form>
+    <br>
+    <div class='well chatbox' id='chat_history'>
+      <ul class='list-unstyled'>
+        <li *ngFor="let message of messages">
+          <i class='fa fa-comment'></i>
+          &nbsp;
+          <b> {{message.from}} </b>:
+          &nbsp;
+          {{ message.text }}
+        </li>
+      </ul>
+    </div>
+  </div> -->
